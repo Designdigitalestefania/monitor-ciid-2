@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Si usas este software, cita como se indica."
+title: "MONITOR CIID 2.0 — Centro Inteligente de Información Digital"
+authors:
+  - family-names: "Pérez Vázquez"
+    given-names: "Estefanía"
+    affiliation: "Monitor Noticias"
+version: 2.0.0
+date-released: 2026-11-18
+license: "Proprietary"
+repository-code: "https://github.com/Designdigitalestefania/monitor-ciid-2"

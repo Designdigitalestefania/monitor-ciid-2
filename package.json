@@ -1,0 +1,22 @@
+{
+  "name": "monitor-ciid-2",
+  "version": "2.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:worker\"",
+    "dev:api": "npm run dev --workspace=@ciid/api",
+    "dev:web": "npm run dev --workspace=@ciid/web",
+    "dev:worker": "npm run dev --workspace=@ciid/worker",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "typescript": "^5.0.0"
+  }
+}
