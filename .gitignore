@@ -3,3 +3,6 @@ dist/
 .env
 .next/
 *.log
+cookies.txt
+apps/api/cookies.txt
+apps/api/.env
