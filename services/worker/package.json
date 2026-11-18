@@ -1,1 +1,1 @@
-{ "name": "@ciid/worker", "version": "2.0.0", "private": true, "type": "module", "scripts": { "dev": "tsx watch src/index.ts" }, "dependencies": { "dotenv": "^16.0.0" }, "devDependencies": { "tsx": "^4.0.0", "typescript": "^5.0.0" } }
+{ "name": "@ciid/worker", "version": "2.0.0", "private": true, "type": "module", "scripts": { "dev": "tsx watch src/index.ts" }, "dependencies": { "dotenv": "^18.0.10" }, "devDependencies": { "tsx": "^4.0.0", "typescript": "^5.0.0" } }
