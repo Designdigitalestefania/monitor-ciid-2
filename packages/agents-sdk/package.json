@@ -1,0 +1,1 @@
+{"name":"@ciid/agents-sdk","version":"2.0.0","private":true,"type":"module","exports":"./src/index.ts","dependencies":{"@ciid/contracts":"*","@ciid/shared":"*","zod":"^3.0.0"}}
