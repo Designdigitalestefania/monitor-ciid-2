@@ -12,7 +12,13 @@ export async function buildApp() {
   const db = createDatabasePool(env.DATABASE_URL);
   app.decorate("db", db);
 
-  await app.register(cors, { origin: env.CORS_ORIGIN, credentials: true });
+  // 🔥 CORS ABIERTO EN DESARROLLO: Acepta cualquier origen y credenciales
+  await app.register(cors, { 
+    origin: true, 
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+  });
+  
   await app.register(cookie);
   await app.register(jwt, { secret: env.JWT_SECRET || "ciid-secreto-desarrollo-2026" });
   await app.register(authRoutes);

@@ -1,13 +1,56 @@
-export default function Home() {
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+
+export default function Dashboard() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem('ciid_token');
+    if (!token) { router.push('/login'); return; }
+
+    fetch('http://192.168.0.7:3001/api/v1/auth/me', { 
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) setLoading(false);
+        else { localStorage.removeItem('ciid_token'); router.push('/login'); }
+      })
+      .catch(() => router.push('/login'));
+  }, [router]);
+
+  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}>Verificando sesión...</div>;
+
+  const modules = [
+    { title: 'Monitor Editorial', desc: 'Procesa materiales de comunicación social y genera propuestas periodísticas.', icon: '📰' },
+    { title: 'Radar Legislativo', desc: 'Monitorea fuentes públicas y genera reportes de actividad legislativa.', icon: '🏛️' },
+    { title: 'Pipeline CIID', desc: 'Gestión de estados, expedientes y revisión humana obligatoria.', icon: '⚙️' },
+    { title: 'Auditoría', desc: 'Registro inmutable de todas las acciones del sistema.', icon: '🛡️' },
+  ];
+
   return (
-    <main style={{ padding: 40, fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ color: "#0a4fff" }}>MONITOR CIID 2.0</h1>
-      <p style={{ color: "#0e1116" }}>Centro Inteligente de Información Digital</p>
-      <p style={{ color: "#b08d57", fontWeight: "bold" }}>"La tecnología asiste. El periodista decide."</p>
-      <div style={{ marginTop: 40, display: "flex", gap: 20 }}>
-        <div style={{ padding: 20, border: "1px solid #2ea043", borderRadius: 8 }}><h3>Monitor Editorial</h3><span style={{ color: "#a371f7" }}>En construcción</span></div>
-        <div style={{ padding: 20, border: "1px solid #2ea043", borderRadius: 8 }}><h3>Radar Legislativo</h3><span style={{ color: "#a371f7" }}>En construcción</span></div>
-      </div>
-    </main>
+    <div className="app-container">
+      <Sidebar />
+      <main className="main-content">
+        <Topbar title="Centro de Operaciones" />
+        <div className="content-area">
+          <h1 style={{ fontSize: '28px', marginBottom: '8px' }}>Bienvenida, Fanny</h1>
+          <p style={{ color: 'var(--ciid-muted)', marginBottom: '32px' }}>Selecciona un módulo para comenzar.</p>
+          <div className="modules-grid">
+            {modules.map((mod, i) => (
+              <div key={i} className="module-card">
+                <div className="module-icon">{mod.icon}</div>
+                <h3>{mod.title}</h3>
+                <p>{mod.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }
