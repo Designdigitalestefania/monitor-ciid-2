@@ -6,6 +6,7 @@ import { env } from "../config/env.js";
 import { createDatabasePool, checkConnection } from "../lib/database.js";
 import { authRoutes } from "../routes/auth.js";
 import { monitorEditorialRoutes } from "../routes/monitor-editorial.js";
+import { radarLegislativoRoutes } from "../routes/radar-legislativo.js";
 import { AuditService } from "../modules/audit/service.js";
 
 export async function buildApp() {
@@ -24,6 +25,7 @@ export async function buildApp() {
   await app.register(jwt, { secret: env.JWT_SECRET || "ciid-secreto-desarrollo-2026" });
   await app.register(authRoutes);
   await app.register(monitorEditorialRoutes);
+  await app.register(radarLegislativoRoutes);
 
   app.get("/health", async () => ({ status: "ok" }));
   app.get("/ready", async (req, reply) => {
