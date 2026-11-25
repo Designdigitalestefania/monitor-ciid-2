@@ -1,48 +1,50 @@
-<div align="center">
-
 # MONITOR CIID 2.0
 
-**Centro Inteligente de Información Digital**
+**Centro Inteligente de Información Digital de Monitor Noticias**  
+**Dirección General de Monitor Noticias:** Carlos Salazar Hernández  
+**Dirección y arquitectura del proyecto:** Estefanía Pérez Vázquez  
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=for-the-badge)](https://github.com/Designdigitalestefania/monitor-ciid-2)
-[![Tests](https://img.shields.io/badge/tests-passing-success?style=for-the-badge)](#pruebas)
-[![License](https://img.shields.io/badge/license-Proprietary-red?style=for-the-badge)](LICENSE)
+> La tecnología asiste. El periodista decide.
 
-<p><em>"La tecnología asiste. El periodista decide."</em></p>
+MONITOR CIID es una plataforma modular para recibir y preservar materiales autorizados, apoyar su clasificación y verificación, preparar propuestas editoriales y registrar decisiones humanas. Los agentes no aprueban ni publican autónomamente.
 
-**Monitor Noticias** — Periodismo confiable. Hechos que Impactan.
+## Estado del proyecto
 
-</div>
+El repositorio contiene una base inicial de monorepo, API, interfaz, migraciones y documentación. La rama `phase-0-security-and-foundation` es de trabajo. El estado actual no representa un producto listo para producción y no debe usarse con información confidencial hasta completar las revisiones de seguridad y privacidad.
 
----
+## Piloto con presupuesto cero
 
-## Descripción
+- Código y colaboración: GitHub Free.
+- Base de datos, autenticación y archivos: Supabase Free como opción, tras verificar sus condiciones y cuotas actuales.
+- Desarrollo local primero; no se presupone que los servicios gratuitos mantengan workers activos o garanticen disponibilidad.
+- Sin integración de WhatsApp/Facebook hasta contar con API y autorización; usar carga/importación controlada.
+- Sin proveedores de IA de pago; cualquier herramienta externa requiere revisión de privacidad y aprobación.
 
-MONITOR CIID 2.0 es una plataforma modular de gestión, recepción, procesamiento, clasificación, verificación y seguimiento de información para **Monitor Noticias**.
+Los planes gratuitos pueden cambiar, tener límites o suspender servicios. Mantener copias locales de trabajo, no cargar secretos al repositorio y no depender de una cuenta gratuita como único respaldo.
 
-Integra dos agentes especializados:
-- **Monitor Editorial**: Procesa materiales de comunicación social.
-- **Radar Legislativo**: Monitorea fuentes públicas.
+## Requisitos para desarrollo local
 
-**Principio institucional**: Ningún agente tiene autorización para publicar información de manera autónoma.
+- Node.js LTS compatible con las dependencias del repositorio.
+- npm y Git.
+- Proyecto PostgreSQL/Supabase configurado únicamente cuando se esté listo para probar persistencia.
 
----
+Las versiones y compatibilidad deben verificarse antes de instalar o actualizar dependencias.
 
-## Requisitos
+## Configuración segura
 
-- **Node.js** >= 20.0.0
-- **PostgreSQL** >= 15.0 (Supabase)
-- **Git** >= 2.40
+1. Copiar `.env.example` a `apps/api/.env`.
+2. Completar `DATABASE_URL` y generar `JWT_SECRET` de manera local (`openssl rand -base64 48`).
+3. No compartir credenciales por chat, issues, commits o capturas; usar el gestor de secretos correspondiente.
+4. Aplicar migraciones solo a una base de desarrollo revisada.
+5. No utilizar el seed para crear credenciales; el seed solo inicializa el tenant.
 
----
+## Gobernanza y decisiones
 
-## Instalación
+- Bitácora del proyecto: `docs/13-project-log.md`.
+- Revisión y límites de seguridad: `docs/14-security-review.md`.
+- Plan por fases: `docs/10-implementation-plan.md`.
+- Decisiones y pendientes: `docs/12-blocking-questions.md`.
 
-```bash
-git clone https://github.com/Designdigitalestefania/monitor-ciid-2.git
-cd monitor-ciid-2
-npm install
-cp .env.example apps/api/.env
-# Edita apps/api/.env con tu DATABASE_URL
-npx tsx scripts/seed.ts
-npm run dev
+## Verificación
+
+No se debe afirmar que un módulo está validado hasta ejecutar y registrar las pruebas correspondientes. Un CI exitoso no sustituye revisión de seguridad, pruebas de aislamiento multi-tenant, pruebas de restauración ni aprobación editorial humana.
