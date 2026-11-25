@@ -13,6 +13,7 @@
     "dev:web": "npm run dev --workspace=@ciid/web",
     "dev:worker": "npm run dev --workspace=@ciid/worker",
     "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present"
   },
   "devDependencies": {
